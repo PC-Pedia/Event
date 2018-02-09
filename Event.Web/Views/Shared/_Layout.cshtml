@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <meta charset="utf-8">
+        <title>Event.ir</title>
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+
+        
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <link href="~/lib/bootstrap-rtl/dist/css/bootstrap-rtl.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
+        <link href="~/lib/tingle/dist/tingle.css" rel="stylesheet" />
+
+        <link href="~/css/site.css" rel="stylesheet" />
+
+        @RenderSection("Head", false)
+
+    </head>
+
+<body>
+
+    @*NavBar*@
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="##">Logo</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right" dir="rtl">
+
+                    <li class="not">
+                        <!-- <form class="navbar-form">
+                            <div class="form-group">
+                                <input class="form-control input-md br-yellow" placeholder="جستجو.." type="text">
+                            </div><button class="btn btn-default btn-lg fa fa-search" type="submit"></button>
+                        </form> -->
+                    </li>
+
+                    <li class="bg-warning">
+                        <a href="#myPage">صفحه اصلی <span class="glyphicon glyphicon-home"></span></a>
+                    </li>
+                    @{
+                            if (User.Identity.IsAuthenticated)
+                            {
+                            
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">@User.Identity.Name <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#">ناحیه کاربری</a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="Signout" asp-controller="Account">خروج</a>
+                                    </li>     
+                                </ul>
+                            </li>
+
+
+                        }
+                        else
+                        {
+                            <li>
+                                <a id="signup" href="" data-toggle="modal" >ثبت نام <span class="glyphicon glyphicon-user"></span></a>
+                            </li>
+
+                            <li>
+                                <a id="login" href="" data-toggle="modal" data-target="#ss">ورود <span class="glyphicon glyphicon-log-in"></span></a>
+                            </li>
+
+                        }
+                    }
+
+
+                    <li>
+                        <a href="#band">تماس با ما </a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Event <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">علمی</a>
+                            </li>
+                            <li>
+                                <a href="#">سرگرمی</a>
+                            </li>
+                            <li>
+                                <a href="#">کسب وکار</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                </ul>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </nav>
+    <br />
+    <br />
+    <br />
+    <br />
+
+
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+    <!---Footer-->
+    <div class="container-fluid f-bg input-margin no-padd">
+        <br>
+        <div class="container">
+
+            <div class="row">
+                <br>
+                <div class="col-sm-6 pull-left"></div>
+                <div class="col-sm-6 pull-right">
+                    <ul class="list-inline">
+                        <li>
+                            <a class="text-white" href="#">تکنولوژی</a>
+                        </li>
+                        <li>
+                            <a class="text-warning" href="#">بازرگانی و فروش</a>
+                        </li>
+                        <li>
+                            <a class="text-white" href="#">روانشناسی</a>
+                        </li>
+                        <li>
+                            <a class="text-warning" href="#">مذهبی</a>
+                        </li>
+                        <li>
+                            <a class="text-white" href="#">گردشگری</a>
+                        </li>
+                        <li>
+                            <a class="text-warning" href="#">پزشکی</a>
+                        </li>
+                        <li>
+                            <a class="h3 text-white" href="#">دسته بندی</a>
+                        </li>
+                    </ul>
+                    <ul class=" list-inline text-left">
+                        <li style="list-style: none; display: inline">
+                            <p>برای ارتباط و اطلاع بیشتر مارادر فضای مجازی دنبال کنید</p>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa fa-telegram fa-2x text-warning"></span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa fa-instagram fa-2x text-warning"></span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa fa-linkedin fa-2x text-warning"></span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa fa-facebook fa-2x text-warning"></span></a>
+                        </li>
+                        <li>
+                            <a href="#"><span class="fa fa-envelope fa-2x text-warning"></span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6 pull-left">
+                    <span class="h3">آدرس:</span> <span>تهران-پاسداران جنب بوستان ششم پلاک 6 واحد 3</span> <span class="fa fa-map-marker text-warning h1"></span><br>
+                    <span class="h3">شماره تماس:</span> 02122323586 <span class="fa fa-phone text-warning"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- login Modal -->
+    <div class="modal fade" id="mainModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                        <button class="close pull-left" data-dismiss="modal" type="button">&times;</button>
+                        <h4 class="modal-title pull-right">ورود اعضا <span class="fa fa-users"></span></h4>
+                    </div>*@
+
+                <div class="modal-body" id="mainModalBody">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @*Scripts*@
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/bootstrap-notify/bootstrap-notify.js"></script>
+        <script src="~/lib/tingle/dist/tingle.js"></script>
+
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+    </environment>
+
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+
+        <script src="~/lib/bootstrap-notify/js/bootstrap-notify.js"></script>
+
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    <script>
+
+
+
+        $("#signup").click(function () {
+            debugger;
+
+
+        var modal = CreateModal();
+
+
+        modal.addFooterBtn('ثبت نام', 'btn btn-success', function () {
+            // here goes some logic
+            //modal.close();
+
+
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("Signup","Account")',
+                data: $("#signupForm").serialize(),
+                success: function (data) {
+
+                    debugger;
+                    if (data.type == 'success')
+                    {
+                        ShowMessage(data);
+                        location.reload();
+
+                    }
+
+                    else {
+
+                        ShowMessage(data);
+                    }
+
+
+
+
+                }
+            });
+
+        });
+
+              $.ajax({
+                type: "Get",
+                url: '@Url.Action("Signup","Account")',
+
+                success: function (data) {
+                    debugger;
+                    modal.setContent(data);
+                    modal.open();
+                }
+                });
+
+
+
+        });
+
+
+
+
+    </script>
+    <script>
+
+         $("#login").click(function () {
+            debugger;
+
+
+            var modal = CreateModal();
+
+
+            modal.addFooterBtn('ورود', 'btn btn-success', function () {
+                // here goes some logic
+                //modal.close();
+
+
+                $.ajax({
+                    type: "Post",
+                    url: '@Url.Action("Login","Account")',
+                    data: $("#loginForm").serialize(),
+                    success: function (data) {
+
+                        debugger;
+                        if (data.type == 'success')
+                        {
+                            ShowMessage(data);
+                            location.reload();
+                        }
+
+                        else {
+                            ShowMessage(data);
+                        }
+
+
+                    }
+                });
+
+            });
+
+              $.ajax({
+                type: "Get",
+                url: '@Url.Action("Login","Account")',
+
+                success: function (data) {
+                    debugger;
+                    modal.setContent(data);
+                    modal.open();
+                }
+                });
+
+
+
+        });
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+﻿@model HomeViewModel
+
+<style>
+    .thumbnail {
+        border: 1; border-radius:0;
+    }
+</style>
+
+@*Slider*@
+<div class="container-fluid" style="width:auto">
+    <div class="row">
+        <div class=" col-sm-12">
+            <div class="carousel slide" data-ride="carousel" id="slider">
+                <ul class="carousel-indicators">
+                    <li class="slide-cr hidden-xs" data-slide-to="0" data-target="#slider"></li>
+                    <li class="slide-cr hidden-xs" data-slide-to="1" data-target="#slider"></li>
+                    <li class="slide-cr hidden-xs" data-slide-to="2" data-target="#slider"></li>
+                    <li class="slide-cr hidden-xs" data-slide-to="3" data-target="#slider"></li>
+                </ul>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img alt="pic1" class="img-responsive img-rounded img-op slider-xs" src="~/images/dotnetCore.png" width="100%">
+                        <div class="carousel-caption">
+                            <span class="h3"></span>
+                        </div>
+                        <!-- <div class="carousel-caption">
+                            <button class="btn btn-default btn-lg btn-slide" style="margin:2px;">ثبت نام کن !</button> <button class="btn btn-warning btn-lg">Read More..</button>
+                        </div> -->
+                    </div>
+                    <div class="item">
+                        <img alt="pic2" class="img-responsive img-op slider-xs" src="~/images/Asp-core.png" width="100%">
+                        <div class="carousel-caption">
+                            <span class="h3"></span>
+                        </div>
+                        <!-- <div class="carousel-caption">
+                            <button class="btn btn-default btn-lg" style="margin:2px;">ثبت نام کن !</button> <button class="btn btn-danger btn-lg">Read More..</button>
+                        </div> -->
+                    </div>
+                    <div class="item">
+                        <img alt="pic4" class="img-responsive img-op slider-xs" src="~/images/banner-class-reunions.jpg" width="100%">
+                        <div class="carousel-caption">
+                            <span class="h3"></span>
+                        </div>
+                        <!-- <div class="carousel-caption">
+                            <button class="btn btn-default btn-lg" style="margin:2px;">ثبت نام کن !</button> <button class="btn btn-primary btn-lg">Read More..</button>
+                        </div> -->
+                    </div>
+                    @*<div class="item">
+                        <img alt="pic3" class="img-responsive img-op slider-xs" src="~/images/networking-events-uae.jpg" width="100%">
+                         <div class="carousel-caption">
+                            <button class="btn btn-default btn-lg" style="margin:2px;">ثبت نام کن !</button> <button class="btn btn-dark btn-lg">Read More..</button>
+                        </div> 
+                    </div>*@
+                </div><a class="left carousel-control" data-slide="prev" href="#slider"><span class="glyphicon glyphicon-chevron-left text-warning"></span></a> <a class="right carousel-control" data-slide="next" href="#slider"><span class="glyphicon glyphicon-chevron-right text-warning"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Search*@
+<div class="container-fluid about">
+
+    <div class="container">
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-offset-3 col-sm-6 text-center">
+                <form asp-controller="Event" asp-action="Index">
+                    <div class="input-group">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-lg " type="submit" value="ثبت"><span class="fa fa-search"></span> جستجو</button>
+                        </div>
+                        <input name="key" class="form-control input-lg br-blue" placeholder="عنوان رویداد رو اینجا وارد کن" type="search">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <br>
+        <hr>
+    </div>
+</div>
+
+
+<div class="container-fluid about">
+
+    @*Events*@
+    <div class="container">
+        <div class="row">
+            @Html.Partial("EventSummary",Model.Events)
+        </div>
+    </div>
+
+    
+
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+
+    function Add() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("Add")',
+            //data: myusername,
+            cache: false,
+            success: function (data) {
+                ShowMessage(data);
+
+            }
+        });
+
+
+        debugger;
+        var modal = CreateModal();
+
+
+        @*modal.addFooterBtn('ثبت', 'btn btn-success', function () {
+            // here goes some logic
+            //modal.close();
+
+
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("Edit")',
+                //data: $("#kir").serialize(),
+                success: function (data) {
+
+                    debugger;
+                    if (data.Type == 'success')
+                    {
+                        
+                        ShowMessage(data);
+                    }
+
+                    else {
+
+                        ShowMessage(data);
+                    }
+
+
+                }
+            });
+
+        });*@
+
+
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("Signup", "Account")',
+            //data: { "id": param },
+            success: function (data) {
+                debugger;
+                modal.setContent(data);
+                modal.open();
+                
+            }
+        });
+    }
+
+    </script>
+
+}
+

@@ -1,0 +1,28 @@
+﻿@model EventSearchModel
+
+<div>
+    @await Html.PartialAsync("SearchForm",Model)
+</div>
+
+<div id="List">
+    @await Html.PartialAsync("List", Model)
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ajaxStart(function () {
+            debugger;
+            $("#loading").show();
+            $("#btnSearch").hide();
+        })
+
+
+
+        $(document).ajaxStop(function () {
+            debugger;
+            $("#loading").hide();
+            $("#btnSearch").show();
+        });
+    </script>
+    }

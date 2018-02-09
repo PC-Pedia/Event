@@ -1,0 +1,55 @@
+﻿@model Event.Web.Models.Paging
+
+<ul class="pagination text-center">
+    @{
+        for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            if (Model.CurrentPage != i)
+            {
+                <li class="page-item"><a href="#" name="dd" class="page-link" onclick="navigate(@i)">@i</a></li>
+            }
+
+            else
+            {
+                <li class="page-item active"><a href="#" name="dd" class="page-link" onclick="navigate(@i)">@i</a></li>
+            }
+        }
+    }
+</ul>
+
+
+
+
+<script>
+
+
+
+    function navigate(num) {
+        debugger;
+
+        var url = '@Url.Action("List")';
+
+        var Paginginfo =
+            {
+                "CurrentPage": num,
+                "PageSize": '@Model.PageSize'
+            };
+
+        var Forminfo = $("#searchForm").serializeArray();
+        Forminfo.push({ name: 'CurrentPage', value: num }, { name: 'PageSize', value: '@Model.PageSize' })
+
+           var info = Paginginfo + Forminfo;
+
+        $.ajax({
+            type: "Post",
+            url: url,
+
+            data: Forminfo,
+            success: function (data) {
+                debugger;
+                $("#List").html(data);
+            }
+        });
+
+    }
+</script>

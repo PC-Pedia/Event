@@ -1,0 +1,68 @@
+﻿
+
+<form id="signupForm">
+
+    <div class="input-group input-margin">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> <input class="form-control" id="UserName" name="UserName" placeholder="نام کاربری" type="text">
+    </div>
+
+    <div class="input-group input-margin">
+        <span class="input-group-addon "><i class="glyphicon glyphicon-phone"></i></span> <input class="form-control" id="PhoneNumber" name="PhoneNumber" placeholder="موبایل" type="text">
+    </div>
+
+    <div class="input-group input-margin">
+        <span class="input-group-addon "><i class="glyphicon glyphicon-lock"></i></span> <input class="form-control" id="Password" name="Password" placeholder="رمز عبور" type="password">
+    </div>
+
+    <div class="input-group input-margin">
+
+        <span class="input-group-addon "><i class="glyphicon glyphicon-map-marker"></i></span>
+        @await Component.InvokeAsync("ProvinceCombo", "ProvinceId")
+
+        <span class="input-group-addon "><i class="glyphicon glyphicon-map-marker"></i></span>
+        <select id="cityId" name="cityId" class="form-control">
+            <option value="">شهر</option>
+        </select>
+
+    </div>
+    
+</form>
+
+
+
+
+
+
+@section Scripts{
+
+
+    <script>
+
+        $("#ProvinceId").change(function () {
+            debugger;
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("GetCities","Common")',
+                data: { provinceId: $(this).val()},
+                success: function (data) {
+                    debugger;
+                    $('#cityId').empty();
+                    $.each(data, function (key, value) {
+
+                        $('#cityId')
+                            .append($("<option></option>")
+                                .attr("value", value.value)
+                                .text(value.text));
+                    });
+                }
+            });
+        });
+
+
+
+
+         
+
+    </script>
+
+}

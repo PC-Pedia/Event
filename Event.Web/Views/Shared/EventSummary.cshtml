@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Ewent>
+
+<div style="display:inline-block">
+
+    @foreach (var item in Model)
+     {
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="thumbnail">
+                <a href="@Url.Action("GetProduct", "Product", new { id = "id" })">
+                    <img alt="event" class="" src="~/images/infographic-Event-Planning-Landscape.png" width="100%">
+                </a>
+                @{
+                //its not good way specially in respnsive pages
+                var title = item.Title.Length > 15 ? $" {item.Title.Substring(0, 15)} ..."  : item.Title;
+            <p class="h3 text-right" id="etitle">@title</p>
+                }
+
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6" style="width:100%">
+
+                        <div class="btn-group btn-group-xs pull-right">
+
+                            <span class="">
+                                <i class="fa fa-map-marker " aria-hidden="true"> </i> <span> @item.City.Title </span> 
+                            </span>
+
+                            <span> &nbsp;</span>
+                            <span class="">
+                                <i class="fa fa-calendar" aria-hidden="true"> </i> <span> @item.Date.ToShortDateString() </span> 
+                            </span>
+
+                            <span> &nbsp;</span>
+                            <span class="">
+                                @{var price = item.Price.HasValue ? $"{item.Price.ToString()} تومان" : "رایگان";}
+                                <i class="fa fa-money p" aria-hidden="true"> </i> <span dir="rtl">@price</span>
+                            </span>
+                        </div>
+
+                        <button class="btn btn-block btn-primary" data-target="#sabtnamevent" data-toggle="modal" id="">ثبت نام <span class="fa fa-user-plus fa-1x hidden-xs"></span></button>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+     }
+  
+</div>

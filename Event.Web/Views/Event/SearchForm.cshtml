@@ -1,0 +1,120 @@
+﻿@model EventSearchModel
+
+<div class="panel panel-primary">
+
+    <div class="panel-body">
+        <form id="searchForm" class="form-horizontal">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>جستوجو </legend>
+
+                <!-- Search input-->
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label" for="searchinput">عنوان رویداد</label>
+                    <div class="col-md-4 text-right">
+                        <input id="SearchTitle" name="SearchTitle" placeholder="عنوان رویداد" class="form-control input-md" type="search">
+                    </div>
+
+                    <label class="col-md-2 control-label" for="selectbasic">نوع رویداد</label>
+                    <div class="col-md-4">
+                        <select id="a" name="a" class="form-control">
+                            <option value="1">نوع رویداد</option>
+                            <option value="2">Option two</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label" for="selectbasic">استان</label>
+                    <div class="col-md-4">
+                        <select id="SearchProvince" name="SearchProvince" class="form-control">
+                            <option value="1">استان</option>
+                            <option value="2">Option two</option>
+                        </select>
+                    </div>
+
+                    <label class="col-md-2 control-label" for="selectbasic">شهر</label>
+                    <div class="col-md-4">
+                        <select id="SearchCity" name="SearchCity" class="form-control">
+                            <option value="1">شهر</option>
+                            <option value="2">Option two</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <!-- Select Basic -->
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label" for="selectbasic">تعداد در صفحه</label>
+                    <div class="col-md-4">
+                        <select id="PageSize" name="PageSize" class="form-control">
+                            <option value="4">4</option>
+                            <option value="8">8 </option>
+                            <option value="12">12</option>
+                            <option value="16">16 </option>
+                        </select>
+                    </div>
+
+                  
+                </div>
+
+
+            </fieldset>
+        </form>
+    </div>
+    <div class="panel-footer">
+      
+        <button class="btn btn-primary" id="btnSearch" onclick="search()">جستوجو</button> 
+        <img id="loading" style="display:none" src="~/images/loading-1.gif" height="35px" width="35px" />
+    </div>
+
+</div>
+
+
+
+
+
+        <script>
+            function search()
+            {
+
+          
+
+
+                var Forminfo = $("#searchForm").serializeArray();
+
+                Forminfo.push(
+                    { name: 'CurrentPage',value: '@Model.CurrentPage'},
+                    { name: 'PageSize', value: '@Model.PageSize'})
+
+
+                debugger;
+                var url = '@Url.Action("List")';
+                $.ajax({
+                    type: "Get",
+                    url: url,
+                    data: Forminfo,
+                    beforeSend: function () {
+                    
+                    },
+                    success: function (data) {
+
+                        $("#List").html(data);
+                    }
+                }).done(function (data) {
+
+                 
+
+                });
+
+            @*{ "CurrentPage": @Model.CurrentPage ,"PageSize":@Model.PageSize, "SearchPhone":phone,"SearchName":name}*@
+        }
+        </script>
+
+
+

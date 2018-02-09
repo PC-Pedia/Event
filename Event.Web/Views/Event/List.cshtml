@@ -1,0 +1,10 @@
+﻿@model EventSearchModel
+<div>
+    @await Html.PartialAsync("EventSummary", Model.Events)
+</div>
+
+<hr />
+
+<div id='Paging' class="container-fluid" style="text-align:center">
+    @await Html.PartialAsync("Paging", Model)
+</div>

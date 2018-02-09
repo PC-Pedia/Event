@@ -1,0 +1,9 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "font-awesome": "fontawesome#v4.7.0",
+    "bootstrap-rtl": "v3.4.0",
+    "tingle": "v0.12.0"
+  }
+}
