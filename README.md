@@ -1,6 +1,6 @@
 
 # Simple Web appliciton For sharing Events
-** :warning: This project isnot completed yet :warning:
+**:warning: This project isnot completed yet :warning:
 
 * Asp.net Core MVC 2
 * EntityFramework Core
