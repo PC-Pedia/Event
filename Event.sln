@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Event.Service", "Event.Infr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Event.Model", "Event.Model\Event.Model.csproj", "{CF43D349-A015-4493-8EAC-B9FBB55B9E15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Event.Admin", "Event.Admin\Event.Admin.csproj", "{C659DAA2-0628-4BF7-83EA-5D94DBDD3BFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Event.Admin", "Event.Admin\Event.Admin.csproj", "{C659DAA2-0628-4BF7-83EA-5D94DBDD3BFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DD00668F-07B5-4F67-BA8C-B5C53AB88A7F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{83EFEFF8-3C72-4209-9BEC-5BB0160A14F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Event.Test", "Event.Test\Event.Test.csproj", "{5C1C6770-414F-43B1-9F72-CD7442B7C884}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Event.Test", "Event.Test\Event.Test.csproj", "{5C1C6770-414F-43B1-9F72-CD7442B7C884}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
