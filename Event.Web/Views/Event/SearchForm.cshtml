@@ -7,14 +7,14 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>جستوجو </legend>
+                <legend> جستوجو</legend>
 
                 <!-- Search input-->
                 <div class="form-group">
 
-                    <label class="col-md-2 control-label" for="searchinput">عنوان رویداد</label>
+                    <label class="col-md-2 control-label" for="searchinput" >عنوان رویداد</label>
                     <div class="col-md-4 text-right">
-                        <input id="SearchTitle" name="SearchTitle" placeholder="عنوان رویداد" class="form-control input-md" type="search">
+                        <input asp-for="SearchTitle" placeholder="عنوان رویداد" class="form-control input-md" type="search">
                     </div>
 
                     <label class="col-md-2 control-label" for="selectbasic">نوع رویداد</label>
@@ -52,7 +52,7 @@
 
                     <label class="col-md-2 control-label" for="selectbasic">تعداد در صفحه</label>
                     <div class="col-md-4">
-                        <select id="PageSize" name="PageSize" class="form-control">
+                        <select asp-for="PageSize" class="form-control">
                             <option value="4">4</option>
                             <option value="8">8 </option>
                             <option value="12">12</option>
@@ -78,43 +78,14 @@
 
 
 
-
+@section Scripts{
         <script>
             function search()
             {
-
-          
-
-
-                var Forminfo = $("#searchForm").serializeArray();
-
-                Forminfo.push(
-                    { name: 'CurrentPage',value: '@Model.CurrentPage'},
-                    { name: 'PageSize', value: '@Model.PageSize'})
-
-
-                debugger;
-                var url = '@Url.Action("List")';
-                $.ajax({
-                    type: "Get",
-                    url: url,
-                    data: Forminfo,
-                    beforeSend: function () {
-                    
-                    },
-                    success: function (data) {
-
-                        $("#List").html(data);
-                    }
-                }).done(function (data) {
-
-                 
-
-                });
-
-            @*{ "CurrentPage": @Model.CurrentPage ,"PageSize":@Model.PageSize, "SearchPhone":phone,"SearchName":name}*@
-        }
+              UpdateList('@Url.Action("List")');
+ 
+            }
         </script>
-
+    }
 
 

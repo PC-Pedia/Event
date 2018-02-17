@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Fonts\IranSans\**" />
+    <Content Remove="wwwroot\Fonts\IranSans\**" />
+    <EmbeddedResource Remove="wwwroot\Fonts\IranSans\**" />
+    <None Remove="wwwroot\Fonts\IranSans\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
@@ -16,11 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Event.Infrastructure\Event.Infrastructure.csproj" />
+    <Folder Include="Areas\Admin\" />
+    <Folder Include="Infrastructure\Middlewares\" />
+    <Folder Include="Views\Shared\Components\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Middlewares\" />
+    <ProjectReference Include="..\Event.Infrastructure\Event.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,27 @@
+﻿@model AppUser
+
+@*profile*@
+<div class="panel panel-primary">
+    <div class="panel-heading">پروفایل <i class="fa fa-link fa-1x"></i></div>
+    <ul class="list-group">
+        <li class="list-group-item text-left">@Model.SignupDate.ToShortDateString()<span class="pull-right"><strong>تاریخ عضویت</strong></span> </li>
+        <li class="list-group-item text-left">@Model.LastLogin<span class="pull-right"><strong>آخرین ورود</strong></span> </li>
+        <li class="list-group-item text-left">@Model.Purchases.Count<span class="pull-right"><strong>تعداد پرداخت ها</strong></span> </li>
+        <li class="list-group-item text-left">@Model.Comments.Count<span class="pull-right"><strong>تعداد نظرات</strong></span> </li>
+
+    </ul>
+</div>
+@*site*@
+<div class="panel panel-primary">
+    <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+    <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+</div>
+
+
+@*social*@
+<div class="panel panel-primary">
+    <div class="panel-heading">Social Media</div>
+    <div class="panel-body">
+        <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+    </div>
+</div>

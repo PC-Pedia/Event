@@ -6,7 +6,7 @@ using Event.Model.EntityModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
-namespace Event.Infrastructure.Data
+namespace Event.Service.Data
 {
 
     //public class AppRole:IdentityRole<int>

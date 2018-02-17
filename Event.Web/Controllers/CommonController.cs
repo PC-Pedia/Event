@@ -1,4 +1,4 @@
-﻿using Event.Infrastructure.Data;
+﻿using Event.Service.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -10,7 +10,7 @@ namespace Event.Web.Controllers
 {
     public class CommonController:BaseController
     {
-        public CommonController(AppDBContext db)
+        public CommonController(AppDBContext db) 
         {
             this.db = db;
         }

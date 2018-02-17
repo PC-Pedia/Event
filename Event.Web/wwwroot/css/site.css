@@ -323,8 +323,8 @@ body {
 
 .bx-shadow {
     box-shadow: 0px 0px 10px;
-    border-radius: 5px;
-    height: 1000px;
+    border-radius: 0px;
+    height:1000px;
 }
 
 .khabarname input {
@@ -371,9 +371,31 @@ body {
 }
 
 .bg-newsletter {
-    background: url(img/news.jpg);
+    background: url(../images/news.jpg);
     background-size: cover;
+    width: 100%;
+    position: relative;
+    outline: 1px dotted red;
+    background-position: center;
+    height: inherit;
+
 }
+
+.parallax-wrapper {
+    position: relative;
+}
+
+.parallax-container {
+    background: url(../images/news.jpg);
+    width: 100vw;
+    position: relative;
+
+    height: 100px;
+
+
+}
+
+
 
 .no-marg {
     margin: 0;
@@ -463,6 +485,7 @@ body {
 
         .nav li a {
             text-align: center;
+
         }
 }
 
@@ -618,3 +641,91 @@ body {
         transform: rotate(360deg);
     }
 }
+
+
+
+/*============================================================*
+   /* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+}
+
+    /* The navigation menu links */
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+    }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+/* Style page content */
+.main {
+    margin-right: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+.msg {
+    /*position: fixed;*/
+    z-index: -1;
+    /*display: none;
+    overflow: hidden;*/
+}
+
+.thumbnail {
+    padding: 0px;
+}
+
+.panel {
+    position: relative;
+}
+
+    .panel > .panel-heading:after, .panel > .panel-heading:before {
+        position: absolute;
+        top: 11px;
+        left: -16px;
+        right: 100%;
+        width: 0;
+        height: 0;
+        display: block;
+        content: " ";
+        border-color: transparent;
+        border-style: solid solid outset;
+        pointer-events: none;
+    }
+
+    .panel > .panel-heading:after {
+        border-width: 7px;
+        border-right-color: #f7f7f7;
+        margin-top: 1px;
+        margin-left: 2px;
+    }
+
+    .panel > .panel-heading:before {
+        border-right-color: #ddd;
+        border-width: 8px;
+    }

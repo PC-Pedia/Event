@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Event.Model.EntityModels;
-using Event.Infrastructure.Data.Repository.Interfaces;
-using Event.Infrastructure.Data;
+using Event.Service.Data.Repository.Interfaces;
+using Event.Service.Data;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace Event.Infrastructure.Data.Repository.SQLRepositories
+namespace Event.Service.Data.Repository.SQLRepositories
 {
     public class CommentRepository : ICommentRepository
     {
@@ -16,24 +18,36 @@ namespace Event.Infrastructure.Data.Repository.SQLRepositories
             Db = dbcontext;
         }
 
+        public IQueryable<Comments> DataSource
+        {
+            get =>
+                   Db.Comments
+                   .Include(x => x.User)
+                   .Include(x => x.Event);
+                
+        }
+
         public AppDBContext Db { get; set; }
 
-        public Comments Add(Comments item)
+        public Task Add(Comments item)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Comments item)
+        public  Task Delete(Comments item)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var result = await Db.Comments.FindAsync(id);
+            Db.Comments.Remove(result);
+            await Db.SaveChangesAsync();
+            
         }
 
-        public Comments Edit(Comments item)
+        public async Task Edit(Comments item)
         {
             throw new NotImplementedException();
         }
@@ -45,12 +59,14 @@ namespace Event.Infrastructure.Data.Repository.SQLRepositories
 
         public IQueryable<Comments> GetAll()
         {
-            throw new NotImplementedException();
+            return DataSource;
         }
 
-        public Comments GetById(int id)
+        public Task<Comments> GetById(int id)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

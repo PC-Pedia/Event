@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Event.Infrastructure.Data.Repository.Interfaces
+namespace Event.Service.Data.Repository.Interfaces
 {
     public interface IPurchaseRepository:IRepository<Purchase>
     {

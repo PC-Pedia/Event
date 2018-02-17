@@ -1,0 +1,77 @@
+﻿@model EventSearchModel
+
+<form id="searchForm"  asp-action="List" class="form-horizontal">
+
+    @*@Html.HiddenFor(x=>x.CurrentPage)*@
+    @*@Html.HiddenFor(x => x.PageSize)*@
+
+    <div class="panel panel-primary">
+
+        <div class="panel-body">
+
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend> جستوجو</legend>
+
+                <!-- Search input-->
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label" for="searchinput">عنوان رویداد</label>
+                    <div class="col-md-4 text-right">
+                        <input asp-for="SearchTitle" placeholder="عنوان رویداد" class="form-control input-md" type="search">
+                    </div>
+
+                    <label class="col-md-2 control-label" for="selectbasic">نوع رویداد</label>
+                    <div class="col-md-4">
+                        <select id="aaaa" name="aaaa" class="form-control">
+                            <option value="1">نوع رویداد</option>
+                            <option value="2">Option two</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <!-- Select Basic -->
+                <div class="form-group">
+
+                    <label class="col-md-2 control-label" for="selectbasic">تعداد در صفحه</label>
+                    <div class="col-md-4">
+                        <select asp-for="PageSize" class="form-control">
+                            <option value="4">4</option>
+                            <option value="8">8 </option>
+                            <option value="12">12</option>
+                            <option value="16">16 </option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+
+            </fieldset>
+
+        </div>
+
+        <div class="panel-footer">
+            <input id="btnSearch" type="button" class="btn btn-sm btn-primary" value="بگرد" />
+            <img id="loading" style="display:none" src="~/images/loading-1.gif" height="35px" width="35px" />
+        </div>
+
+    </div>
+</form>
+
+
+    <script>
+
+        $('#btnSearch').click(function () {
+
+            UpdateList('@Url.Action("List")');
+        });
+
+
+    </script>
+
+
+

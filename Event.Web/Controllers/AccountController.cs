@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Event.Infrastructure.Data;
+using Event.Service.Data;
 using Event.Model.EntityModels;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -9,27 +9,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Event.Web.Models.ViewModels;
 using Event.Web.Infrastructure.ActionResults;
+using Event.Service.Data.Repository.Interfaces;
 
 namespace Event.Web.Controllers
 {
     public class AccountController:BaseController
     {
-        public AccountController(UserManager<AppUser> userMGR,SignInManager<AppUser> signinMGR)
+        public AccountController(IUserRepository userRepo, UserManager<AppUser> userMGR,SignInManager<AppUser> signinMGR)
         {
             userManager = userMGR;
             signinManager = signinMGR;
-          
+            UserRepo = UserRepo;
         }
 
         public AppDBContext db { get; set; }
         public UserManager<AppUser> userManager { get; set; }
         public SignInManager<AppUser> signinManager { get; set; }
+        public IUserRepository UserRepo { get; set; }
 
 
-        public IActionResult Login() => PartialView();
+
+        public IActionResult Login() => View();
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel model)
+        public async Task<IActionResult> Login(LoginModel model,string Returnurl)
         {
 
             if(ModelState.IsValid)
@@ -41,17 +44,17 @@ namespace Event.Web.Controllers
                     await signinManager.SignOutAsync();
 
                     await signinManager.SignInAsync(user, true, null);
+ 
+                    IList<string> roles = await userManager.GetRolesAsync(user);
 
+                    if (!string.IsNullOrEmpty(Returnurl))
+                        return Redirect(Returnurl);
 
-                    if (true)
-                    {
-                        IList<string> roles = await userManager.GetRolesAsync(user);
-
-                        if (roles.Contains("Administrator"))
-                            return RedirectToAction("Index", "Admin", new { area = "Admin" });
-                        else
-                            return new MessageResult($"خوش اومدی {user.UserName}", MessageType.success);
-                    }
+                    if (roles.Contains("Administrator"))
+                        return RedirectToAction("Index", "Admin", new { area = "Admin" });
+                    else
+                        return new MessageResult($"خوش اومدی {user.UserName}", MessageType.success);
+                   
                 }
 
             }
@@ -62,16 +65,12 @@ namespace Event.Web.Controllers
 
         }
 
-
-
-        public IActionResult Signup() => PartialView();
-
         [HttpPost]
         public async Task<IActionResult> Signup(SignupModel model)
         {
             if(ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.UserName, PhoneNumber = model.PhoneNumber, CityId = model.cityId };
+                var user = new AppUser { SignupDate = DateTime.Now, UserName = model.UserName, PhoneNumber = model.PhoneNumber, CityId = model.cityId };
                 await userManager.AddPasswordAsync(user, model.Password);
                 var result = await userManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -87,7 +86,6 @@ namespace Event.Web.Controllers
             return View();
             
         }
-
 
         public async Task<IActionResult> Signout()
         {

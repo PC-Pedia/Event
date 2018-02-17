@@ -7,6 +7,14 @@ namespace Event.Model.EntityModels
 {
     public class AppUser : IdentityUser<int>
     {
+        public DateTime LastLogin { get; set; }
+
+        public DateTime SignupDate { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+       
         public int? CityId { get; set;}
 
         public ICollection<Ewent> Events { get; set; }

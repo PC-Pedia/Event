@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using Event.Model.EntityModels;
-using Event.Infrastructure.Data;
-using Event.Infrastructure.Data.Repository.Interfaces;
+using Event.Service.Data;
+using Event.Service.Data.Repository.Interfaces;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
-namespace Event.Infrastructure.Data.Repository.SQLRepositories
+namespace Event.Service.Data.Repository.SQLRepositories
 {
     public class PurchaseRepository :IPurchaseRepository
     {
@@ -15,24 +17,35 @@ namespace Event.Infrastructure.Data.Repository.SQLRepositories
             Db = dbContext;
         }
 
+        public IQueryable<Purchase> DataSource
+        {
+            get =>
+                  Db.Purchases.Include(x => x.User)
+                  .Include(x => x.Event);
+        }
+
         public AppDBContext Db { get; set; }
 
-        public Purchase Add(Purchase item)
+        public async Task Add(Purchase item)
+        {
+            await Db.AddAsync(item);
+            await Db.SaveChangesAsync();
+        }
+
+        public Task Delete(Purchase item)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(Purchase item)
+        public async Task DeleteById(int id)
         {
-            throw new NotImplementedException();
+            var result = await Db.Purchases.FindAsync(id);
+            Db.Purchases.Remove(result);
+            await Db.SaveChangesAsync();
+
         }
 
-        public bool DeleteById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Purchase Edit(Purchase item)
+        public async Task Edit(Purchase item)
         {
             throw new NotImplementedException();
         }
@@ -44,12 +57,14 @@ namespace Event.Infrastructure.Data.Repository.SQLRepositories
 
         public IQueryable<Purchase> GetAll()
         {
-            throw new NotImplementedException();
+            return DataSource;
         }
 
-        public Purchase GetById(int id)
+        public Task<Purchase> GetById(int id)
         {
             throw new NotImplementedException();
         }
+
+      
     }
 }

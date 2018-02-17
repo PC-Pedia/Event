@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Purchase>
+
+
+<table class="table table-hover table-striped ">
+
+
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>رویداد</th>
+            <th>تاریخ</th>
+            <th>تعداد</th>
+            <th>قیمت کل</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @{
+            var i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Event.Title</td>
+                    <td>@item.Createdate.ToShortDateString()</td>
+                    <td>@item.Count </td>
+                    <td>@item.Price</td>
+
+                </tr>
+
+             }
+
+        }
+
+    </tbody>
+
+</table>

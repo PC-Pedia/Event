@@ -5,25 +5,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-
+using System.Linq;
 
 namespace Event.Web.Infrastructure.ActionResults
 {
     public class MessageResult : IActionResult
     {
-        public MessageResult(string body, MessageType messageType)
-        {
-            Body = body;
-            Type = messageType.ToString();
-        }
         
-        public string Body { get; set; }
+        public MessageResult(IEnumerable<string> body, MessageType type)
+        {
+            Body = body.ToArray();
+            Type = type.ToString();
+            IsSuccess = type == MessageType.success ? true : false;
+        }
+
+        public MessageResult(string body, MessageType type)
+        {
+            Body=new string[] { body };
+            Type = type.ToString();
+            IsSuccess = type == MessageType.success ? true : false;
+        }
+
+        public string[] Body { get; set; }
         public string Type { get; set; }
+        public bool IsSuccess { get; set; }
 
         public Task ExecuteResultAsync(ActionContext context)
         {
             var result = Encoding.UTF8.GetBytes(
-                JsonConvert.SerializeObject(new { body = Body, type = Type }));
+                JsonConvert.SerializeObject(new { body = Body, type = Type, isSuccess=IsSuccess }));
 
             context.HttpContext.Response.StatusCode = 200;
             context.HttpContext.Response.ContentType = "application/json";

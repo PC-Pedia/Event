@@ -1,0 +1,144 @@
+﻿@model EventSearchModel
+
+
+
+
+
+        <table class="table table-hover table-striped table-bordered">
+
+
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>عنوان</th>
+                    <th>تاریخ</th>
+                    <th>قیمت</th>
+                    <th>شهر</th>
+                    <th>وضعیت</th>
+                    <th>عملیات</th>
+                    
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    var i =(Model.CurrentPage-1) * Model.PageSize ;
+                    foreach (var item in Model.Events)
+                    {
+                        i++;
+                            <tr>
+                                <td>@i</td>
+                                <td>@item.Title</td>
+                                <td>@item.Date</td>
+                                @{
+                                    var price = item.Price.HasValue ? item.Price.ToString() : "رایگان";
+                                    <td>@price</td>
+                                }
+                                
+                                <td>@item.City.Title </td>
+                                <td> 
+                                    @{
+                                       
+                                        switch (item.Status)
+                                        {
+                                            case Event.Model.EventStatus.Normal:
+                                                <span class="label label-success">@item.Status.ToString()</span>
+                                                break;
+                                            case Event.Model.EventStatus.Pending:
+                                                <span class="label label-info">@item.Status.ToString()</span>
+                                                break;
+                                            case Event.Model.EventStatus.Rejected:
+                                                <span class="label label-danger">@item.Status.ToString()</span>
+                                                break;
+                                            default:
+                                                break;
+                                        }
+
+
+                                    }
+                                </td>
+                                <td><a onclick="Edit(@item.Id)" class="btn btn-sm btn-info">ویرایش</a>
+                               <a onclick="Delete(@item.Id)" class="btn btn-sm btn-danger">خذف</a></td>
+                            </tr>
+                        
+                    }
+
+
+                }
+
+            </tbody>
+
+        </table>
+
+  
+
+
+
+
+
+    <div class="h4">
+
+        <span>کلا</span>
+        <span class="label label-info">@Model.TotalItems</span>
+        <span>تا</span>
+
+    </div>
+
+
+
+    <hr />
+
+
+   
+
+    <div id='Paging' style="text-align:center">
+        @Html.Partial("Paging", Model)
+    </div>
+
+ 
+
+
+
+<script>
+
+    function Delete(param) {
+
+          $.ajax({
+            type: "Post",
+            url: '@Url.Action("Delete")',
+            data: { "id": param },
+            success: function (data) {
+
+                ShowMessage(data);
+                UpdateList('@Url.Action("List")');
+
+
+            }
+        });
+
+
+    }
+
+
+    function Edit(param) {
+        debugger;
+
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("Edit")',
+            data: { id: param },
+            success: function (data) {
+                debugger;
+                ShowModal(data);
+            },
+            error: function (data) {
+                debugger;
+                alert(data);
+            }
+        });
+
+
+    }
+
+
+</script>

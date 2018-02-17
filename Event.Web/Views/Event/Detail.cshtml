@@ -1,0 +1,140 @@
+﻿@model Ewent
+
+
+
+    <div class="margin-t" style="width:100%;">
+        <div class="container shadow">
+            <div class="row">
+               
+                <div class="col-lg-3  text-center  form-padding ">
+                    <p class="h3 text-info">@Model.Title</p>
+
+                    <strong class="h4 text-info"> <i class="fa fa-calendar h4" aria-hidden="true"> <span>&nbsp;</span> </i>@Html.DisplayNameFor(x => x.Date) </strong><br>
+                    <div class="btn-group btn-group-xs ">
+                        <span class="pull-right h5">
+                             <span class="h5"> @Model.Date.ToShortDateString() </span> - <span> @Model.Date.ToShortTimeString() </span> 
+                        </span>
+                  
+
+                    </div><br>
+
+
+                    <strong class="h4 text-info"><i class="fa fa-check h4" aria-hidden="true"></i> <span>&nbsp;</span> @Html.DisplayNameFor(x => x.CategoryId)</strong><br>
+                    <div class="btn-group btn-group-xs ">
+                        <span class="pull-right h5">
+                            <span> @Model.Category.Title </span>
+                        </span>
+
+                    </div><br>
+
+
+                    <strong class="h4 text-info"> <i class="fa fa-map-marker h4" aria-hidden="true"></i> <span>&nbsp;</span> @Html.DisplayNameFor(x => x.CityId)</strong><br>
+                    <div class="btn-group btn-group-xs ">
+                        <span class="pull-right h5">
+                           <span> @Model.City.Title </span>
+                        </span>
+
+                    </div><br>
+
+
+                    <strong class="h4 text-info"> <i class="fa fa-money h4" aria-hidden="true"></i> <span>&nbsp;</span> @Html.DisplayNameFor(x => x.Price)</strong><br>
+                    <div class="btn-group btn-group-xs ">
+                        <span class="pull-right h5">
+                            <span> @Model.Price تومان </span>
+                        </span>
+
+                    </div><br>
+
+                    <button id="btnBuy"class="btn btn-sm btn-primary input-margin"><span class="fa fa-shopping-cart"></span> خرید بلیط</button>
+
+                    <button id="btnBookmark" class="btn btn-sm btn-primary input-margin"><span class="fa fa-bookmark"></span> نشان کردن </button>
+
+                </div>
+                <div class="col-lg-6 form-padding">
+                    <img src="~/images/ER.jpg" alt="تصویر رویداد" class="img-responsive   center-block" width="100%">
+
+                </div>
+
+                <div class="col-lg-3 text-center  form-padding">
+                    <p class="h2 text-info">برگزار کننده رویداد </p>
+                    <small class="h4"><span class="fa fa-user  text-info"> </span> @Model.User.UserName </small><br>
+                   
+                    <small class="h4"><span class="fa fa-phone  text-info"> </span> @Model.User.PhoneNumber </small><br>
+
+                  
+                </div>
+            </div>
+
+        </div><br>
+    </div>
+
+
+<div >
+    <div class="row">
+       
+        <div class="col-sm-9 ">
+            <span class="col-sm-12 h3  br-bt ">
+                <span class="pull-right form-padding">
+                    توضیحات پیرامون دوره
+                </span>
+            </span>
+            <br>
+
+
+            <p class="h4" dir="rtl">
+               @Html.Raw(Model.Description)
+            </p>
+
+
+       
+        </div>
+
+        <div class="col-sm-3 text-center margin-t">
+            <span class="h4">
+                اعتبار رایگان
+            </span><br>
+            <button class="btn btn-me-b h5">
+                به اشتراک بگذارید
+                <span class="fa fa-share"></span>
+            </button><br><br>
+            <a href="#"><span class="fa fa-telegram fa-2x"></span></a>
+            <a href="#"><span class="fa fa-facebook fa-2x"></span></a>
+            <a href="#"><span class="fa fa-envelope fa-2x"></span></a>
+        </div>
+        
+    </div>
+</div>
+
+@await Html.PartialAsync("Comments", Model.Comments);
+
+
+@section Scripts{
+
+    <script>
+
+        $("#btnBuy").click(function () {
+            $.ajax({
+                type: "Post",
+                url: '@Url.Action("Pay","Purchase")',
+                data: {id:@Model.Id},
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+
+                    ShowMessage(data);
+                }
+            }).done(function (data) {
+
+
+
+            });
+        });
+
+
+          $("#btnBookmark").click(function () {
+          
+        });
+    </script>
+
+}

@@ -26,6 +26,8 @@
 
     function navigate(num) {
         debugger;
+        
+        StartLoading();
 
         var url = '@Url.Action("List")';
 
@@ -49,6 +51,10 @@
                 debugger;
                 $("#List").html(data);
             }
+        }).done(function (data) {
+
+            StopLoading();
+
         });
 
     }

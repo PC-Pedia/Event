@@ -7,13 +7,18 @@
         <div class="col-sm-6 col-md-4 col-lg-3">
             <div class="thumbnail">
                 <a href="@Url.Action("GetProduct", "Product", new { id = "id" })">
-                    <img alt="event" class="" src="~/images/infographic-Event-Planning-Landscape.png" width="100%">
+
+                    @{
+
+                            <img alt="event" class="" src="~/images/no-image.png" style="height:150px; width: 500px;">
+
+
+                    }
+
+
                 </a>
-                @{
-                //its not good way specially in respnsive pages
-                var title = item.Title.Length > 15 ? $" {item.Title.Substring(0, 15)} ..."  : item.Title;
-            <p class="h3 text-right" id="etitle">@title</p>
-                }
+
+               <p class="h3 text-right" id="etitle">@item.Title</p>
 
 
                 <div class="row">
@@ -36,9 +41,10 @@
                                 <i class="fa fa-money p" aria-hidden="true"> </i> <span dir="rtl">@price</span>
                             </span>
                         </div>
-
-                        <button class="btn btn-block btn-primary" data-target="#sabtnamevent" data-toggle="modal" id="">ثبت نام <span class="fa fa-user-plus fa-1x hidden-xs"></span></button>
-
+                        <div>
+                            <br />
+                            <a asp-action="Detail" asp-controller="Event" asp-route-id="@item.Id" class="btn btn-block btn-primary">ثبت نام <span class="fa fa-user-plus fa-1x hidden-xs"></span></a>
+                        </div>
                     </div>
 
                 </div>

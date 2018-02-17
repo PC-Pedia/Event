@@ -2,9 +2,9 @@
 //using System;
 //using System.Collections.Generic;
 //using System.Text;
-//using Event.Infrastructure.Data.Repository.Interfaces;
+//using Event.Service.Data.Repository.Interfaces;
 
-//namespace Event.Infrastructure.Data.Repository.SQLRepositories
+//namespace Event.Service.Data.Repository.SQLRepositories
 //{
 //    public class EFUnitOfWork:IUnitOfWork
 //    {

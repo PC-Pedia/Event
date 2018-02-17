@@ -6,13 +6,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Event.Infrastructure.Data;
+using Event.Service.Data;
 using Microsoft.EntityFrameworkCore;
-using Event.Infrastructure.Data.Repository.Interfaces;
-using Event.Infrastructure.Data.Repository.SQLRepositories;
+using Event.Service.Data.Repository.Interfaces;
+using Event.Service.Data.Repository.SQLRepositories;
 using Event.Model.EntityModels;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
+using Event.Service;
+using System.Net.Http;
 
 namespace Event.Web
 {
@@ -41,14 +43,12 @@ namespace Event.Web
 
             services.AddIdentity<AppUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<AppDBContext>();
-            //resolving repository dependencies
-            services.AddTransient<IEventRepository, EventRepository>();
-            services.AddTransient<IEventCategoryRepository, EventCategoryRepository>();
-            services.AddTransient<IPurchaseRepository, PurchaseRepository>();
-            services.AddTransient<ICommentRepository,CommentRepository>();
-            services.AddTransient<IUserRepository,UserRepository>();
 
-            //services.AddSingleton<Event.Model.Mapper.MappingEX>();
+
+            services.AddSingleton<HttpClient>();
+
+            services.AddRepository();
+
             services.AddAutoMapper();
 
             services.AddMvc();
@@ -69,6 +69,11 @@ namespace Event.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "AreaRoute",
+                    template: "{area}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
@@ -87,6 +92,11 @@ namespace Event.Web
 
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "AreaRoute",
+                    template: "{area}/{controller=Home}/{action=Index}/{id?}"
+                    );
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

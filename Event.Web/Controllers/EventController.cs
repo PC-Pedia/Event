@@ -1,18 +1,21 @@
-﻿using Event.Infrastructure.Data.Repository.Interfaces;
+﻿using Event.Service.Data.Repository.Interfaces;
+using Event.Model.EntityModels;
 using Event.Web.Models.SearchModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Event.Web.Controllers
 {
     public class EventController:BaseController
     {
 
-        public EventController(IEventRepository eventRepo)
+        public EventController(IEventRepository eventRepo) 
         {
             EventRepo = eventRepo;
         }
@@ -39,10 +42,9 @@ namespace Event.Web.Controllers
 
             model.TotalItems = query.Count();
 
-            var result = query.OrderBy(x => x.Createdate)
+            var result =  query
                                 .Skip((model.CurrentPage - 1) * model.PageSize)
                                 .Take(model.PageSize)
-                                //.ToModel()
                                 .ToList();
 
             model.Events = result;
@@ -51,10 +53,10 @@ namespace Event.Web.Controllers
 
         }
 
-        public IActionResult Index(string key)
+        public async Task<IActionResult> Index(string key)
         {
             var model = new EventSearchModel { SearchTitle = key };
-            model = Search(model);
+            model =  Search(model);
 
             return View(model);
         }
@@ -67,6 +69,14 @@ namespace Event.Web.Controllers
 
             return PartialView(result);
         }
-       
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var model = await EventRepo.GetAll().Include(x=>x.Comments).FirstOrDefaultAsync(x => x.Id == id);
+            if (model == null) return NotFound();
+            return View(model);
+        }
+        
+      
     }
 }

@@ -1,0 +1,57 @@
+﻿@model AppUser
+
+<hr>
+<form class="form" action="##" method="post" id="registrationForm">
+    <div class="form-group">
+
+        <div class="col-xs-6">
+            <label for="first_name"><h4>نام</h4></label>
+            <input type="text" class="form-control" asp-for="UserName" placeholder=" نام" title="enter your first name if any.">
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="col-xs-6">
+            <label for="last_name"><h4>نام خانوادگی</h4></label>
+            <input type="text" class="form-control" id="xyz" placeholder="نام خانوادگی" title="enter your last name if any.">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-xs-6">
+            <label for="mobile"><h4>موبایل</h4></label>
+            <input type="text" class="form-control" asp-for="PhoneNumber" placeholder="موبایل" title="enter your mobile number if any.">
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="col-xs-6">
+            <label for="email"><h4>ایمیل</h4></label>
+            <input type="email" class="form-control" asp-for="Email" placeholder="ایمیل" title="enter your email.">
+        </div>
+    </div>
+
+    <div class="form-group">
+
+        <div class="col-xs-6">
+            <label for="password"><h4>کلمه عبور</h4></label>
+            <input type="password" class="form-control" name="password" id="password" placeholder="password" title="enter your password.">
+        </div>
+    </div>
+    <div class="form-group">
+
+        <div class="col-xs-6">
+            <label for="password2"><h4>تاید کلمه عبور</h4></label>
+            <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12">
+            <br>
+            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> بروزکن</button>
+            <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+        </div>
+    </div>
+</form>
+

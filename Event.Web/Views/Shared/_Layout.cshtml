@@ -22,7 +22,7 @@
 <body>
 
     @*NavBar*@
-    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar" style="z-index:2">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button class="navbar-toggle" data-target="#myNavbar" data-toggle="collapse" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="##">Logo</a>
@@ -39,7 +39,7 @@
                     </li>
 
                     <li class="bg-warning">
-                        <a href="#myPage">صفحه اصلی <span class="glyphicon glyphicon-home"></span></a>
+                        <a asp-action="Index" asp-controller="Home">صفحه اصلی</a>
                     </li>
                     @{
                             if (User.Identity.IsAuthenticated)
@@ -49,7 +49,7 @@
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">@User.Identity.Name <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="#">ناحیه کاربری</a>
+                                        <a asp-route-area="user" asp-controller="Home" asp-action="Index" >ناحیه کاربری</a>
                                     </li>
                                     <li>
                                         <a asp-action="Signout" asp-controller="Account">خروج</a>
@@ -62,12 +62,10 @@
                         else
                         {
                             <li>
-                                <a id="signup" href="" data-toggle="modal" >ثبت نام <span class="glyphicon glyphicon-user"></span></a>
+                                <a id="signup" asp-action="Login" asp-controller="Account" data-toggle="modal" >ثبت نام / ورود </a>
                             </li>
 
-                            <li>
-                                <a id="login" href="" data-toggle="modal" data-target="#ss">ورود <span class="glyphicon glyphicon-log-in"></span></a>
-                            </li>
+                         
 
                         }
                     }
@@ -77,20 +75,7 @@
                         <a href="#band">تماس با ما </a>
                     </li>
 
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Event <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="#">علمی</a>
-                            </li>
-                            <li>
-                                <a href="#">سرگرمی</a>
-                            </li>
-                            <li>
-                                <a href="#">کسب وکار</a>
-                            </li>
-                        </ul>
-                    </li>
+              
 
 
                 </ul>
@@ -111,12 +96,14 @@
 
 
 
-    <div class="container">
+    <div class="container" >
         @RenderBody()
     </div>
-
+    <br />
+    <br />
+    <br />
     <!---Footer-->
-    <div class="container-fluid f-bg input-margin no-padd">
+    <div class="container-fluid f-bg input-margin no-padd margin-t">
         <br>
         <div class="container">
 
@@ -230,115 +217,7 @@
 
 
 
-        $("#signup").click(function () {
-            debugger;
-
-
-        var modal = CreateModal();
-
-
-        modal.addFooterBtn('ثبت نام', 'btn btn-success', function () {
-            // here goes some logic
-            //modal.close();
-
-
-            $.ajax({
-                type: "Post",
-                url: '@Url.Action("Signup","Account")',
-                data: $("#signupForm").serialize(),
-                success: function (data) {
-
-                    debugger;
-                    if (data.type == 'success')
-                    {
-                        ShowMessage(data);
-                        location.reload();
-
-                    }
-
-                    else {
-
-                        ShowMessage(data);
-                    }
-
-
-
-
-                }
-            });
-
-        });
-
-              $.ajax({
-                type: "Get",
-                url: '@Url.Action("Signup","Account")',
-
-                success: function (data) {
-                    debugger;
-                    modal.setContent(data);
-                    modal.open();
-                }
-                });
-
-
-
-        });
-
-
-
-
-    </script>
-    <script>
-
-         $("#login").click(function () {
-            debugger;
-
-
-            var modal = CreateModal();
-
-
-            modal.addFooterBtn('ورود', 'btn btn-success', function () {
-                // here goes some logic
-                //modal.close();
-
-
-                $.ajax({
-                    type: "Post",
-                    url: '@Url.Action("Login","Account")',
-                    data: $("#loginForm").serialize(),
-                    success: function (data) {
-
-                        debugger;
-                        if (data.type == 'success')
-                        {
-                            ShowMessage(data);
-                            location.reload();
-                        }
-
-                        else {
-                            ShowMessage(data);
-                        }
-
-
-                    }
-                });
-
-            });
-
-              $.ajax({
-                type: "Get",
-                url: '@Url.Action("Login","Account")',
-
-                success: function (data) {
-                    debugger;
-                    modal.setContent(data);
-                    modal.open();
-                }
-                });
-
-
-
-        });
+      
 
     </script>
 

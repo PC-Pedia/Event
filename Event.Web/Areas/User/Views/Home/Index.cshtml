@@ -1,0 +1,66 @@
+﻿@model Event.Web.Areas.Models.ViewModels.MainViewModel
+
+
+
+<div class="tab-pane active" id="home">
+    <div class="">
+
+        <div>
+            <br />
+            @await Html.PartialAsync("SearchForm", Model.EventSearchModel)
+            <br />
+            <button id="btnCreate" href="#" class="h4 btn btn-success"><span class="fa fa-plus">&nbsp</span>جدید</button>
+            <div id="List">
+                @await Html.PartialAsync("List", Model.EventSearchModel)
+            </div>
+        </div>
+
+    </div><!--/table-resp-->
+
+    <hr>
+
+</div><!--/tab-pane-->
+
+<div class="tab-pane" id="purchases">
+
+    @await Html.PartialAsync("PurchasesList", Model.Purchases)
+
+</div><!--/tab-pane-->
+
+<div class="tab-pane" id="comments">
+
+    @await Html.PartialAsync("CommentsList", Model.Comments)
+
+</div><!--/tab-pane-->
+
+<div class="tab-pane" id="settings">
+
+ @await Html.PartialAsync("UserInfoForm",Model.User)
+
+</div>
+
+
+@section Scripts{
+
+    <script>
+    
+        $("#btnCreate").click(function () {
+
+            debugger;
+       
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("Create")',
+            
+            success: function (data) {
+                debugger;
+                ShowModal(data);
+            }
+        });
+
+        });
+
+
+
+    </script>
+}
